@@ -27,7 +27,7 @@ openstack_cli_packages:
   - python3-openstackclient
   - python3-senlinclient
   - python3-swiftclient
-
+  - python3-osc-placement
                                                                    # ]]]
 
 # URL for the Ubuntu Cloud Archive repository
