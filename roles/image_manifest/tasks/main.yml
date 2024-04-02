@@ -11,6 +11,16 @@
         msg: "File {{ image_manifest_path }} already exists, use -e image_manifest_force=true to overwrite"
       when: _stat.stat.exists
 
+- name: Give names it trys to sync
+  ansible.builtin.debug:
+    msg: "from: {{ atmosphere_images[item] }} to: {{ image_manifest_data['atmosphere_images'][item] | regex_replace('@sha256:[a-z0-9]+', '') }}"
+  loop: |
+    {%- if image_manifest_images is string -%}
+    {{ image_manifest_images | split(',') }}
+    {%- else -%}
+    {{ image_manifest_images }}
+    {%- endif -%}
+
 - name: Mirror images
   when: image_manifest_mirror
   changed_when: false
